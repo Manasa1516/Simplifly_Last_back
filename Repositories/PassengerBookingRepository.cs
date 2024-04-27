@@ -162,6 +162,7 @@ namespace Simplifly.Repositories
                 }
             }
 
+
             // All seats are available
             return true;
         }

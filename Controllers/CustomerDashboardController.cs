@@ -173,5 +173,20 @@ namespace Simplifly.Controllers
                 return NotFound(nsbe.Message);
             }
         }
+        [Route("GetAllCancelledBookings")]
+        [HttpGet]
+        public async Task<ActionResult<List<CancelledBooking>>> GetAllCancelledBookings()
+        {
+            try
+            {
+                var cancelledBookings = await _bookingService.GetAllCancelledBookings();
+                return cancelledBookings;
+            }
+            catch (NoSuchBookingsException ex)
+            {
+                _logger.LogError(ex.Message);
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

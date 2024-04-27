@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Simplifly.Controllers;
 using Simplifly.Models;
+using Simplifly.Models.DTO_s;
 
 namespace Simplifly.Interfaces
 {
@@ -17,5 +18,8 @@ namespace Simplifly.Interfaces
         Task<List<string>> GetBookedSeatBySchedule(int scheduleID);
         Task<List<PassengerBooking>> GetBookingsByCustomerId(int customerId);
         Task<PassengerBooking> CancelBookingByPassenger(int passengerId);
+        Task<ActionResult<List<CancelledBooking>>> GetAllCancelledBookings();
+        Task<CancelledBooking> UpdateRefundStatus(int id, string Status);
+
     }
 }

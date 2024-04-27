@@ -22,7 +22,7 @@ namespace Simplifly.Models
         [ForeignKey("UserId")]
         public DateTime BookingTime { get; set; }
 
-        public  BookingStatus bookingStatus { get; set; }
+        public  string bookingStatus { get; set; }
         public double TotalPrice { get; set; }
 
         public Booking()   
@@ -30,7 +30,7 @@ namespace Simplifly.Models
             Id = 0;
 
         }
-        public Booking( int scheduleId,int paymentid, int userId, DateTime bookingTime, double totalPrice,BookingStatus bookingstatus )
+        public Booking( int scheduleId,int paymentid, int userId, DateTime bookingTime, double totalPrice,string bookingstatus )
         {
             ScheduleId = scheduleId;
             UserId = userId;
@@ -41,34 +41,9 @@ namespace Simplifly.Models
 
             
         }
-        public enum BookingStatus
-        {
-            Successful,
-            Failed,
-            RefundRequested,
-            Cancelled,
-            RefundIssued
-        }
-        public static string GetBookingStatusString(BookingStatus status)
-        {
-            switch (status)
-            {
-                case BookingStatus.Successful:
-                    return "Successful";
-                case BookingStatus.Failed:
-                    return "Failed";
-                case BookingStatus.RefundRequested:
-                    return "RefundRequested";
-                case BookingStatus.Cancelled:
-                    return "Cancelled";
-                case BookingStatus.RefundIssued:
-                    return "RefundIssued";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(status), status, "Invalid booking status");
-            }
-        }
+        
 
-        public Booking(int id,int scheduleId, int paymentid, int userId, DateTime bookingTime, double totalPrice, BookingStatus bookingstatus)
+        public Booking(int id,int scheduleId, int paymentid, int userId, DateTime bookingTime, double totalPrice, string bookingstatus)
         {
             Id = id;
             ScheduleId = scheduleId;

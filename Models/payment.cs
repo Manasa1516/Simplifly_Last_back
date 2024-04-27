@@ -11,7 +11,7 @@ namespace Simplifly.Models
         public int PaymentId { get; set; }
         public double Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public PaymentStatus Status { get; set; }
+        public string Status { get; set; }
 
         // Payment details (e.g., card number, expiry date, CVV)
         public PaymentDetails PaymentDetails { get; set; } = new PaymentDetails();
@@ -23,7 +23,7 @@ namespace Simplifly.Models
             PaymentId = 0;
         }
 
-        public Payment(int paymentId, double amount, DateTime paymentDate, PaymentStatus status, PaymentDetails paymentDetails, Booking booking)
+        public Payment(int paymentId, double amount, DateTime paymentDate, string status, PaymentDetails paymentDetails, Booking booking)
         {
             PaymentId = paymentId;
             Amount = amount;
@@ -32,7 +32,7 @@ namespace Simplifly.Models
             PaymentDetails = paymentDetails;
 
         }
-        public Payment( double amount, DateTime paymentDate, PaymentStatus status, PaymentDetails paymentDetails, Booking booking)
+        public Payment( double amount, DateTime paymentDate, string status, PaymentDetails paymentDetails, Booking booking)
         {
             Amount = amount;
             PaymentDate = paymentDate;
@@ -47,14 +47,7 @@ namespace Simplifly.Models
         }
     }
 
-    public enum PaymentStatus
-    {
-        Pending,
-        Successful,
-        Failed,
-        RefundRequested,
-        RefundIssued
-    }
+   
 
     public class PaymentDetails
     {

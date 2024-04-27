@@ -24,18 +24,7 @@ namespace Simplifly.Services
 
         private readonly ILogger<BookingService> _logger;
 
-        /// <summary>
-        /// Constructor to initialize objects
-        /// </summary>
-        /// <param name="bookingRepository"></param>
-        /// <param name="scheduleRepository"></param>
-        /// <param name="passengerBookingRepository"></param>
-        /// <param name="flightRepository"></param>
-        /// <param name="bookingsRepository"></param>
-        /// <param name="seatDetailRepository"></param>
-        /// <param name="passengerBookingRepository1"></param>
-        /// <param name="paymentRepository"></param>
-        /// <param name="logger"></param>
+        
         public BookingService(IRepository<int, CancelledBooking> cancelBookingRepository,IRepository<string,SeatDetail> seatRepository,IRepository<int, Booking> bookingRepository, IRepository<int, Schedule> scheduleRepository, IRepository<int, PassengerBooking> passengerBookingRepository, IRepository<string, Flight> flightRepository, IBookingRepository bookingsRepository, ISeatDeatilRepository seatDetailRepository, IPassengerBookingRepository passengerBookingRepository1, IRepository<int, Payment> paymentRepository, ILogger<BookingService> logger)
         {
             _flightRepository = flightRepository;
@@ -112,7 +101,7 @@ namespace Simplifly.Services
             {
                 Amount = bookingRequest.Price,
                 PaymentDate = DateTime.Now,
-                Status = PaymentStatus.Successful,
+                Status = "Successful",
                 PaymentDetails = bookingRequest.PaymentDetails,
             };
             var addedPayment = await _paymentRepository.Add(payment);
@@ -124,7 +113,7 @@ namespace Simplifly.Services
                 UserId = bookingRequest.UserId,
                 BookingTime = DateTime.Now,
                 TotalPrice = bookingRequest.Price,
-                bookingStatus = Booking.BookingStatus.Successful,
+                bookingStatus = "Successful",
 
                 PaymentId = addedPayment.PaymentId,
             };
@@ -293,7 +282,7 @@ namespace Simplifly.Services
                 await _cancelBookingRepository.Add(_cancelBooking);
 
                 //updating booking status
-                booking.bookingStatus = Booking.BookingStatus.Cancelled;
+                booking.bookingStatus = "Cancelled";
                 await _bookingRepository.Update(booking);
 
                 //refund request
@@ -364,14 +353,14 @@ namespace Simplifly.Services
             }
 
             // Check payment status
-            if (payment.Status != PaymentStatus.Successful)
+            if (payment.Status != "Successful")
             {
                 throw new Exception("Refund cannot be requested for unsuccessful payments.");
             }
 
             // Updating paymentStatus to "RefundRequested" for refund request
 
-            payment.Status = PaymentStatus.RefundRequested;
+            payment.Status = "RefundRequested";
             cancelBooking.RefundStatus = "RefundRequested";
 
             await _paymentRepository.Update(payment);
@@ -438,8 +427,25 @@ namespace Simplifly.Services
             }
             throw new NoSuchCustomerException();
         }
-        //adding comments to check git
-        //add
        
+
+        public async Task<ActionResult<List<CancelledBooking>>> GetAllCancelledBookings()
+        {
+            var cancelledBookings = await _cancelBookingRepository.GetAsync();
+            return cancelledBookings;
+        }
+        public async Task<CancelledBooking> UpdateRefundStatus(int id, string status)
+        {
+            var cancelledBooking = await _cancelBookingRepository.GetAsync(id);
+            if (cancelledBooking != null)
+            {
+                cancelledBooking.RefundStatus = status;
+                await _cancelBookingRepository.Update(cancelledBooking);
+                _logger.LogInformation("Refund status updated from service method");
+                return cancelledBooking;
+            }
+            throw new NoSuchBookingsException();
+        }
+
     }
 }

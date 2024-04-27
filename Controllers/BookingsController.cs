@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Simplifly.Exceptions;
 using Simplifly.Interfaces;
 using Simplifly.Models;
+using Simplifly.Models.DTO_s;
+using Simplifly.Services;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Simplifly.Controllers
@@ -53,5 +55,23 @@ namespace Simplifly.Controllers
                 return NotFound(nsbe.Message);
             }
         }
+        [Route("UpdateRefundStatus")]
+        [HttpPut]
+        [Authorize(Roles = "flightOwner")]
+        public async Task<IActionResult> UpdateRefundStatus(BookingStatusDTO refundStatusDTO)
+        {
+            try
+            {
+                await _bookingService.UpdateRefundStatus(refundStatusDTO.Id, refundStatusDTO.RefundStatus);
+                return Ok();
+            }
+            catch (NoSuchBookingsException nscbe)
+            {
+                _logger.LogInformation(nscbe.Message);
+                return NotFound(nscbe.Message);
+            }
+        }
+
+
     }
 }

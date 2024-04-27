@@ -5,6 +5,7 @@ using Simplifly.Context;
 using Simplifly.Exceptions;
 using Simplifly.Interfaces;
 using Simplifly.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Simplifly.Repositories
 {
@@ -52,13 +53,26 @@ namespace Simplifly.Repositories
 
         public async Task<List<CancelledBooking>> GetAsync()
         {
-            var cancelBookings = _context.CancelledBookings.ToList();
+            var cancelBookings = _context.CancelledBookings.Include(pb => pb.Booking).Include(pb => pb.Booking.Schedule)
+            .Include(pb => pb.Booking.Schedule.Route)
+            .Include(e => e.Booking.Schedule.Flight).Include(e => e.Booking.Schedule.Route.SourceAirport)
+            .Include(pb => pb.Booking.Schedule.Route.DestinationAirport)
+            .ToList();
             return cancelBookings;
         }
 
-        public Task<CancelledBooking> Update(CancelledBooking item)
+        
+        public async Task<CancelledBooking> Update(CancelledBooking item)
         {
-            throw new NotImplementedException();
+            var cancelBooking = await GetAsync(item.Id);
+            if (cancelBooking != null)
+            {
+                _context.Entry<CancelledBooking>(item).State = EntityState.Modified;
+                _context.SaveChanges();
+                _logger.LogInformation($"CancelBooking updated with id {item.BookingId}");
+                return cancelBooking;
+            }
+            throw new NoSuchBookingsException();
         }
     }
 }

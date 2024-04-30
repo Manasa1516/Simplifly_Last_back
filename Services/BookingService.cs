@@ -23,8 +23,16 @@ namespace Simplifly.Services
         private readonly IRepository<int, Payment> _paymentRepository;
 
         private readonly ILogger<BookingService> _logger;
+        private IRepository<int, Booking> object1;
+        private IRepository<int, Schedule> object2;
+        private IRepository<int, PassengerBooking> object3;
+        private IRepository<string, Flight> object4;
+        private IBookingRepository object5;
+        private ISeatDeatilRepository object6;
+        private IPassengerBookingRepository object7;
+        private IRepository<int, Payment> object8;
+        private ILogger<BookingService> object9;
 
-        
         public BookingService(IRepository<int, CancelledBooking> cancelBookingRepository,IRepository<string,SeatDetail> seatRepository,IRepository<int, Booking> bookingRepository, IRepository<int, Schedule> scheduleRepository, IRepository<int, PassengerBooking> passengerBookingRepository, IRepository<string, Flight> flightRepository, IBookingRepository bookingsRepository, ISeatDeatilRepository seatDetailRepository, IPassengerBookingRepository passengerBookingRepository1, IRepository<int, Payment> paymentRepository, ILogger<BookingService> logger)
         {
             _flightRepository = flightRepository;
@@ -38,6 +46,19 @@ namespace Simplifly.Services
             _cancelBookingRepository = cancelBookingRepository;
             _paymentRepository = paymentRepository;
             _logger = logger;
+        }
+
+        public BookingService(IRepository<int, Booking> object1, IRepository<int, Schedule> object2, IRepository<int, PassengerBooking> object3, IRepository<string, Flight> object4, IBookingRepository object5, ISeatDeatilRepository object6, IPassengerBookingRepository object7, IRepository<int, Payment> object8, ILogger<BookingService> object9)
+        {
+            this.object1 = object1;
+            this.object2 = object2;
+            this.object3 = object3;
+            this.object4 = object4;
+            this.object5 = object5;
+            this.object6 = object6;
+            this.object7 = object7;
+            this.object8 = object8;
+            this.object9 = object9;
         }
         #region CreateBooking
         public async Task<bool> CreateBookingAsync(BookingRequestDto bookingRequest)

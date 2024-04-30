@@ -57,7 +57,7 @@ namespace Simplifly.Controllers
         }
         [Route("UpdateRefundStatus")]
         [HttpPut]
-        [Authorize(Roles = "flightOwner")]
+        [Authorize(Roles = "flightOwner, admin")]
         public async Task<IActionResult> UpdateRefundStatus(BookingStatusDTO refundStatusDTO)
         {
             try

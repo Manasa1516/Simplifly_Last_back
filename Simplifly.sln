@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simplifly", "Simplifly.csproj", "{90CAA623-106C-4B69-AA40-E1C644B0D0A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpliflyTest", "..\SimpliflyTest\SimpliflyTest.csproj", "{27CB37DA-5A0C-4099-BF1B-B195614D89E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplyflyTest", "..\SimplyflyTest\SimplyflyTest.csproj", "{C70BB365-19DC-47E1-A315-3A6B5FFA44BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{90CAA623-106C-4B69-AA40-E1C644B0D0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90CAA623-106C-4B69-AA40-E1C644B0D0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90CAA623-106C-4B69-AA40-E1C644B0D0A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27CB37DA-5A0C-4099-BF1B-B195614D89E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27CB37DA-5A0C-4099-BF1B-B195614D89E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27CB37DA-5A0C-4099-BF1B-B195614D89E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27CB37DA-5A0C-4099-BF1B-B195614D89E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C70BB365-19DC-47E1-A315-3A6B5FFA44BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C70BB365-19DC-47E1-A315-3A6B5FFA44BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C70BB365-19DC-47E1-A315-3A6B5FFA44BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C70BB365-19DC-47E1-A315-3A6B5FFA44BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

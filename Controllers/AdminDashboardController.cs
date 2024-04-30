@@ -44,7 +44,6 @@ namespace Simplifly.Controllers
             return Ok(bookings);
         }
         [HttpGet("Users/AllCustomers")]
-        [Authorize(Roles = "admin, flightOwner")]
         public async Task<IActionResult> GetAsync()
         {
             var users = await _custService.GetAllCustomers();
